@@ -40,7 +40,7 @@
 @interface ViewController () <WKScriptMessageHandler,WKNavigationDelegate>
 
 //
-@property (nonnull, nonatomic, strong) WKWebView *webView;
+@property (nullable, nonatomic, strong) WKWebView *webView;
 
 //
 @property (nonnull, nonatomic, strong) WKScriptMessageHandlerHelper *handlerHelper;
@@ -128,6 +128,10 @@
             }
         }
         self.webView.alpha = 0;
+        
+        //销毁webView
+        [_webView removeFromSuperview];
+        _webView = nil;
     }
 }
 
