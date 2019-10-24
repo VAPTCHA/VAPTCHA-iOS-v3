@@ -103,6 +103,10 @@
 //
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     if ([message.name isEqualToString:@"signal"]) {
+        //销毁webView
+        [_webView removeFromSuperview];
+        _webView = nil;
+        //解析返回结果
         id body = message.body;
         NSLog(@"%@",body);
         if ([body isKindOfClass:NSString.class]) {
@@ -111,27 +115,22 @@
             if (resultDic) {
                 if ([resultDic[@"signal"] isEqualToString:@"pass"]) {
                     _passed = YES;
-                }else {
+                }else if ([resultDic[@"signal"] isEqualToString:@"cancel"]) {
+                    _passed = NO;
+                }else if ([resultDic[@"signal"] isEqualToString:@"error"]) {
                     _passed = NO;
                 }
             }
             //
-            if (_passed || self.webView.alpha) {
-                NSString *sinal = resultDic[@"signal"];
-                NSString *data = resultDic[@"data"];
-                //
-                self.alertController = [UIAlertController alertControllerWithTitle:sinal message:data preferredStyle:UIAlertControllerStyleAlert];
-                [self.alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }]];
-                [self presentViewController:self.alertController animated:YES completion:nil];
-            }
+            NSString *sinal = resultDic[@"signal"];
+            NSString *data = resultDic[@"data"];
+            //
+            self.alertController = [UIAlertController alertControllerWithTitle:sinal message:data preferredStyle:UIAlertControllerStyleAlert];
+            [self.alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+            }]];
+            [self presentViewController:self.alertController animated:YES completion:nil];
         }
-        self.webView.alpha = 0;
-        
-        //销毁webView
-        [_webView removeFromSuperview];
-        _webView = nil;
     }
 }
 
