@@ -86,7 +86,7 @@
 - (IBAction)buttonClickedAction:(UIButton *)sender {
     //
     _passed = NO;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://v.vaptcha.com/app/ios.html?vid=5b4d9c33a485e50410192331&lang=zh-CN&offline_server=https://www.vaptchadowntime.com/dometime"]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://v.vaptcha.com/app/ios.html?vid=5b4d9c33a485e50410192331&scene=0&lang=zh-CN&offline_server=https://www.vaptchadowntime.com/dometime"]]];
 }
 
 
