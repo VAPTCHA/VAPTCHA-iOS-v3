@@ -86,7 +86,8 @@
 - (IBAction)buttonClickedAction:(UIButton *)sender {
     //
     _passed = NO;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://v-cn.vaptcha.com/app/ios.html?vid=5b4d9c33a485e50410192331&scene=0&lang=zh-CN&area=cn"]]];
+	// 在这里配置你的ios.html所在地址,e.g.: https://xxx.com/yyy/ios.html
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"你的地址?vid=5b4d9c33a485e50410192331&scene=0&lang=zh-CN&area=cn"]]];
 }
 
 
