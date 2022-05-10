@@ -86,7 +86,8 @@
 - (IBAction)buttonClickedAction:(UIButton *)sender {
     //
     _passed = NO;
-	// 在这里配置你的ios.html资源地址,e.g.: https://xxx.com/yyy/ios.html
+    // 在这里配置你的ios.html资源地址,e.g.: https://xxx.com/yyy/ios.html
+    // 注意：默认只能加载https
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"你的地址?vid=5b4d9c33a485e50410192331&scene=0&lang=zh-CN&area=cn"]]];
 }
 
