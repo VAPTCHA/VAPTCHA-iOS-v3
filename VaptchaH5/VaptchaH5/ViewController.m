@@ -112,7 +112,8 @@
         NSLog(@"%@",body);
         if ([body isKindOfClass:NSString.class]) {
             NSString *jsonString = body;
-            NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+            NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
             if (resultDic) {
                 if ([resultDic[@"signal"] isEqualToString:@"pass"]) {
                     _passed = YES;
@@ -124,9 +125,9 @@
             }
             //
             NSString *sinal = resultDic[@"signal"];
-            NSString *data = resultDic[@"data"];
+            //NSString *data = resultDic[@"data"];
             //
-            self.alertController = [UIAlertController alertControllerWithTitle:sinal message:data preferredStyle:UIAlertControllerStyleAlert];
+            self.alertController = [UIAlertController alertControllerWithTitle:sinal message:jsonString preferredStyle:UIAlertControllerStyleAlert];
             [self.alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
             }]];
